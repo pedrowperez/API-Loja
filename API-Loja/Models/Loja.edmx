@@ -1,0 +1,658 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="lojaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="idAddress" />
+          </Key>
+          <Property Name="idAddress" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="numberAddress" Type="int" Nullable="false" />
+          <Property Name="CEPAddress" Type="int" Nullable="false" />
+          <Property Name="cityAddress" Type="int" Nullable="false" />
+          <Property Name="UFAddress" Type="int" Nullable="false" />
+          <Property Name="ContryAddress" Type="int" Nullable="false" />
+          <Property Name="idClient" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="idCategory" />
+          </Key>
+          <Property Name="idCategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameCategory" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descriptionCateogira" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="idClient" />
+          </Key>
+          <Property Name="idClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firtNameClient" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fullNameClient" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="emailClient" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="passwordClient" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CPFClient" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phoneClient" Type="varchar" MaxLength="50" />
+          <Property Name="bithDayClient" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ItemRequest">
+          <Key>
+            <PropertyRef Name="idItemRequest" />
+          </Key>
+          <Property Name="idItemRequest" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="amountItemRequest" Type="int" Nullable="false" />
+          <Property Name="priceItemRequest" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="idProduct" Type="int" Nullable="false" />
+          <Property Name="idRequest" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Management">
+          <Key>
+            <PropertyRef Name="idManagement" />
+          </Key>
+          <Property Name="idManagement" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameManagement" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="loginManagement" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="passwordManagement" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="typeManagement" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="idPayment" />
+          </Key>
+          <Property Name="idPayment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descriptionPayment" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="idProduct" />
+          </Key>
+          <Property Name="idProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameProduct" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descriptionProduct" Type="varchar" MaxLength="100" />
+          <Property Name="priceProduct" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="discountProduct" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="activeProduct" Type="bit" Nullable="false" />
+          <Property Name="amountProduct" Type="int" Nullable="false" />
+          <Property Name="idCategory" Type="int" Nullable="false" />
+          <Property Name="idManagement" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="idRequest" />
+          </Key>
+          <Property Name="idRequest" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dataRequest" Type="datetime" Nullable="false" />
+          <Property Name="idClient" Type="int" Nullable="false" />
+          <Property Name="idStatusRequest" Type="int" Nullable="false" />
+          <Property Name="idPayment" Type="int" Nullable="false" />
+          <Property Name="idAddress" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatusRequest">
+          <Key>
+            <PropertyRef Name="idStatusRequest" />
+          </Key>
+          <Property Name="idStatusRequest" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descriptionStatusRequest" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Address__idClien__571DF1D5">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemReque__idPro__5FB337D6">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ItemRequest" Type="Self.ItemRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="ItemRequest">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemReque__idReq__60A75C0F">
+          <End Role="Request" Type="Self.Request" Multiplicity="1" />
+          <End Role="ItemRequest" Type="Self.ItemRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="idRequest" />
+            </Principal>
+            <Dependent Role="ItemRequest">
+              <PropertyRef Name="idRequest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__idCateg__4D94879B">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="idCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__idManag__4E88ABD4">
+          <End Role="Management" Type="Self.Management" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Management">
+              <PropertyRef Name="idManagement" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="idManagement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__idAddre__5CD6CB2B">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="idAddress" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="idAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__idClien__59FA5E80">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__idPayme__5BE2A6F2">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="idPayment" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="idPayment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__idStatu__5AEE82B9">
+          <End Role="StatusRequest" Type="Self.StatusRequest" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusRequest">
+              <PropertyRef Name="idStatusRequest" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="idStatusRequest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="lojaModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemRequest" EntityType="Self.ItemRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Management" EntityType="Self.Management" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusRequest" EntityType="Self.StatusRequest" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Address__idClien__571DF1D5" Association="Self.FK__Address__idClien__571DF1D5">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemReque__idPro__5FB337D6" Association="Self.FK__ItemReque__idPro__5FB337D6">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ItemRequest" EntitySet="ItemRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemReque__idReq__60A75C0F" Association="Self.FK__ItemReque__idReq__60A75C0F">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="ItemRequest" EntitySet="ItemRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__idCateg__4D94879B" Association="Self.FK__Product__idCateg__4D94879B">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__idManag__4E88ABD4" Association="Self.FK__Product__idManag__4E88ABD4">
+            <End Role="Management" EntitySet="Management" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__idAddre__5CD6CB2B" Association="Self.FK__Request__idAddre__5CD6CB2B">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__idClien__59FA5E80" Association="Self.FK__Request__idClien__59FA5E80">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__idPayme__5BE2A6F2" Association="Self.FK__Request__idPayme__5BE2A6F2">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__idStatu__5AEE82B9" Association="Self.FK__Request__idStatu__5AEE82B9">
+            <End Role="StatusRequest" EntitySet="StatusRequest" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="lojaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="idAddress" />
+          </Key>
+          <Property Name="idAddress" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="numberAddress" Type="Int32" Nullable="false" />
+          <Property Name="CEPAddress" Type="Int32" Nullable="false" />
+          <Property Name="cityAddress" Type="Int32" Nullable="false" />
+          <Property Name="UFAddress" Type="Int32" Nullable="false" />
+          <Property Name="ContryAddress" Type="Int32" Nullable="false" />
+          <Property Name="idClient" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Address__idClien__571DF1D5" FromRole="Address" ToRole="Client" />
+          <NavigationProperty Name="Request" Relationship="Self.FK__Request__idAddre__5CD6CB2B" FromRole="Address" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="idCategory" />
+          </Key>
+          <Property Name="idCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descriptionCateogira" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__idCateg__4D94879B" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="idClient" />
+          </Key>
+          <Property Name="idClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firtNameClient" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fullNameClient" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="emailClient" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="passwordClient" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CPFClient" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phoneClient" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="bithDayClient" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Address__idClien__571DF1D5" FromRole="Client" ToRole="Address" />
+          <NavigationProperty Name="Request" Relationship="Self.FK__Request__idClien__59FA5E80" FromRole="Client" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="ItemRequest">
+          <Key>
+            <PropertyRef Name="idItemRequest" />
+          </Key>
+          <Property Name="idItemRequest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="amountItemRequest" Type="Int32" Nullable="false" />
+          <Property Name="priceItemRequest" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="idProduct" Type="Int32" Nullable="false" />
+          <Property Name="idRequest" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__ItemReque__idPro__5FB337D6" FromRole="ItemRequest" ToRole="Product" />
+          <NavigationProperty Name="Request" Relationship="Self.FK__ItemReque__idReq__60A75C0F" FromRole="ItemRequest" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="Management">
+          <Key>
+            <PropertyRef Name="idManagement" />
+          </Key>
+          <Property Name="idManagement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameManagement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="loginManagement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="passwordManagement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="typeManagement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__idManag__4E88ABD4" FromRole="Management" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="idPayment" />
+          </Key>
+          <Property Name="idPayment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descriptionPayment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Request" Relationship="Self.FK__Request__idPayme__5BE2A6F2" FromRole="Payment" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="idProduct" />
+          </Key>
+          <Property Name="idProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameProduct" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descriptionProduct" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="priceProduct" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="discountProduct" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="activeProduct" Type="Boolean" Nullable="false" />
+          <Property Name="amountProduct" Type="Int32" Nullable="false" />
+          <Property Name="idCategory" Type="Int32" Nullable="false" />
+          <Property Name="idManagement" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__idCateg__4D94879B" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="ItemRequest" Relationship="Self.FK__ItemReque__idPro__5FB337D6" FromRole="Product" ToRole="ItemRequest" />
+          <NavigationProperty Name="Management" Relationship="Self.FK__Product__idManag__4E88ABD4" FromRole="Product" ToRole="Management" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="idRequest" />
+          </Key>
+          <Property Name="idRequest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dataRequest" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idClient" Type="Int32" Nullable="false" />
+          <Property Name="idStatusRequest" Type="Int32" Nullable="false" />
+          <Property Name="idPayment" Type="Int32" Nullable="false" />
+          <Property Name="idAddress" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Request__idAddre__5CD6CB2B" FromRole="Request" ToRole="Address" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Request__idClien__59FA5E80" FromRole="Request" ToRole="Client" />
+          <NavigationProperty Name="ItemRequest" Relationship="Self.FK__ItemReque__idReq__60A75C0F" FromRole="Request" ToRole="ItemRequest" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK__Request__idPayme__5BE2A6F2" FromRole="Request" ToRole="Payment" />
+          <NavigationProperty Name="StatusRequest" Relationship="Self.FK__Request__idStatu__5AEE82B9" FromRole="Request" ToRole="StatusRequest" />
+        </EntityType>
+        <EntityType Name="StatusRequest">
+          <Key>
+            <PropertyRef Name="idStatusRequest" />
+          </Key>
+          <Property Name="idStatusRequest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descriptionStatusRequest" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Request" Relationship="Self.FK__Request__idStatu__5AEE82B9" FromRole="StatusRequest" ToRole="Request" />
+        </EntityType>
+        <Association Name="FK__Address__idClien__571DF1D5">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__idAddre__5CD6CB2B">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="idAddress" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="idAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__idCateg__4D94879B">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="idCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__idClien__59FA5E80">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemReque__idPro__5FB337D6">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ItemRequest" Type="Self.ItemRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="ItemRequest">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemReque__idReq__60A75C0F">
+          <End Role="Request" Type="Self.Request" Multiplicity="1" />
+          <End Role="ItemRequest" Type="Self.ItemRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="idRequest" />
+            </Principal>
+            <Dependent Role="ItemRequest">
+              <PropertyRef Name="idRequest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__idManag__4E88ABD4">
+          <End Role="Management" Type="Self.Management" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Management">
+              <PropertyRef Name="idManagement" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="idManagement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__idPayme__5BE2A6F2">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="idPayment" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="idPayment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__idStatu__5AEE82B9">
+          <End Role="StatusRequest" Type="Self.StatusRequest" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusRequest">
+              <PropertyRef Name="idStatusRequest" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="idStatusRequest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="lojaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Address" EntityType="Self.Address" />
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="ItemRequest" EntityType="Self.ItemRequest" />
+          <EntitySet Name="Management" EntityType="Self.Management" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Request" EntityType="Self.Request" />
+          <EntitySet Name="StatusRequest" EntityType="Self.StatusRequest" />
+          <AssociationSet Name="FK__Address__idClien__571DF1D5" Association="Self.FK__Address__idClien__571DF1D5">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__idAddre__5CD6CB2B" Association="Self.FK__Request__idAddre__5CD6CB2B">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__idCateg__4D94879B" Association="Self.FK__Product__idCateg__4D94879B">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__idClien__59FA5E80" Association="Self.FK__Request__idClien__59FA5E80">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemReque__idPro__5FB337D6" Association="Self.FK__ItemReque__idPro__5FB337D6">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ItemRequest" EntitySet="ItemRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemReque__idReq__60A75C0F" Association="Self.FK__ItemReque__idReq__60A75C0F">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="ItemRequest" EntitySet="ItemRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__idManag__4E88ABD4" Association="Self.FK__Product__idManag__4E88ABD4">
+            <End Role="Management" EntitySet="Management" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__idPayme__5BE2A6F2" Association="Self.FK__Request__idPayme__5BE2A6F2">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__idStatu__5AEE82B9" Association="Self.FK__Request__idStatu__5AEE82B9">
+            <End Role="StatusRequest" EntitySet="StatusRequest" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="lojaModelStoreContainer" CdmEntityContainer="lojaEntities">
+          <EntitySetMapping Name="Address">
+            <EntityTypeMapping TypeName="lojaModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="idAddress" ColumnName="idAddress" />
+                <ScalarProperty Name="nameAddress" ColumnName="nameAddress" />
+                <ScalarProperty Name="numberAddress" ColumnName="numberAddress" />
+                <ScalarProperty Name="CEPAddress" ColumnName="CEPAddress" />
+                <ScalarProperty Name="cityAddress" ColumnName="cityAddress" />
+                <ScalarProperty Name="UFAddress" ColumnName="UFAddress" />
+                <ScalarProperty Name="ContryAddress" ColumnName="ContryAddress" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="lojaModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+                <ScalarProperty Name="descriptionCateogira" ColumnName="descriptionCateogira" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="lojaModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="firtNameClient" ColumnName="firtNameClient" />
+                <ScalarProperty Name="fullNameClient" ColumnName="fullNameClient" />
+                <ScalarProperty Name="emailClient" ColumnName="emailClient" />
+                <ScalarProperty Name="passwordClient" ColumnName="passwordClient" />
+                <ScalarProperty Name="CPFClient" ColumnName="CPFClient" />
+                <ScalarProperty Name="phoneClient" ColumnName="phoneClient" />
+                <ScalarProperty Name="bithDayClient" ColumnName="bithDayClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemRequest">
+            <EntityTypeMapping TypeName="lojaModel.ItemRequest">
+              <MappingFragment StoreEntitySet="ItemRequest">
+                <ScalarProperty Name="idItemRequest" ColumnName="idItemRequest" />
+                <ScalarProperty Name="amountItemRequest" ColumnName="amountItemRequest" />
+                <ScalarProperty Name="priceItemRequest" ColumnName="priceItemRequest" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="idRequest" ColumnName="idRequest" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Management">
+            <EntityTypeMapping TypeName="lojaModel.Management">
+              <MappingFragment StoreEntitySet="Management">
+                <ScalarProperty Name="idManagement" ColumnName="idManagement" />
+                <ScalarProperty Name="nameManagement" ColumnName="nameManagement" />
+                <ScalarProperty Name="loginManagement" ColumnName="loginManagement" />
+                <ScalarProperty Name="passwordManagement" ColumnName="passwordManagement" />
+                <ScalarProperty Name="typeManagement" ColumnName="typeManagement" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payment">
+            <EntityTypeMapping TypeName="lojaModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="idPayment" ColumnName="idPayment" />
+                <ScalarProperty Name="descriptionPayment" ColumnName="descriptionPayment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="lojaModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="nameProduct" ColumnName="nameProduct" />
+                <ScalarProperty Name="descriptionProduct" ColumnName="descriptionProduct" />
+                <ScalarProperty Name="priceProduct" ColumnName="priceProduct" />
+                <ScalarProperty Name="discountProduct" ColumnName="discountProduct" />
+                <ScalarProperty Name="activeProduct" ColumnName="activeProduct" />
+                <ScalarProperty Name="amountProduct" ColumnName="amountProduct" />
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="idManagement" ColumnName="idManagement" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Request">
+            <EntityTypeMapping TypeName="lojaModel.Request">
+              <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="idRequest" ColumnName="idRequest" />
+                <ScalarProperty Name="dataRequest" ColumnName="dataRequest" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="idStatusRequest" ColumnName="idStatusRequest" />
+                <ScalarProperty Name="idPayment" ColumnName="idPayment" />
+                <ScalarProperty Name="idAddress" ColumnName="idAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusRequest">
+            <EntityTypeMapping TypeName="lojaModel.StatusRequest">
+              <MappingFragment StoreEntitySet="StatusRequest">
+                <ScalarProperty Name="idStatusRequest" ColumnName="idStatusRequest" />
+                <ScalarProperty Name="descriptionStatusRequest" ColumnName="descriptionStatusRequest" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
