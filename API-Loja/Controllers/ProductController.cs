@@ -5,39 +5,86 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using API_Loja.Models;
+using API_Loja.DAO;
+using Newtonsoft.Json;
 
 namespace API_Loja.Controllers
 {
     public class ProductController : ApiController
     {
-        // GET: api/Product
-        public string Get()
+        [HttpGet]
+        public HttpResponseMessage Get()
         {
-            lojaEntities loja = new lojaEntities();
-            var teste = loja.Product.First().nameProduct;
-
-            return teste;
+            try
+            {
+                ProductDAO productDAO = new ProductDAO();
+                var products = productDAO.Get();
+                return Request.CreateResponse(HttpStatusCode.OK, products);
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
         }
 
-        // GET: api/Product/5
-        public string Get(int id)
+        [HttpGet]
+        public HttpResponseMessage Get(int id)
         {
-            return "value";
+            try
+            {
+                ProductDAO productDAO = new ProductDAO();
+                var products = productDAO.Get(id);
+                return Request.CreateResponse(HttpStatusCode.OK, products);
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Product of id {id} not found");
+            }
         }
 
-        // POST: api/Product
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public HttpResponseMessage Post([FromBody]Product product)
         {
+            try
+            {
+                ProductDAO productDAO = new ProductDAO();
+                productDAO.Add(product);
+                return Request.CreateResponse(HttpStatusCode.OK, $"{product.nameProduct} added successfully");
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
         }
 
-        // PUT: api/Product/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        public HttpResponseMessage Put([FromBody]Product product)
         {
+            try
+            {
+                ProductDAO productDAO = new ProductDAO();
+                productDAO.Update(product);
+                return Request.CreateResponse(HttpStatusCode.OK, $"{product.nameProduct} updated successfully");
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
         }
 
-        // DELETE: api/Product/5
-        public void Delete(int id)
+        [HttpDelete]
+        public HttpResponseMessage Delete(int id)
         {
+            try
+            {
+                ProductDAO productDAO = new ProductDAO();
+                productDAO.Delete(id);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
         }
     }
 }
