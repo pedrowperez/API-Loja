@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="lojaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="lojaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="idAddress" />
@@ -79,6 +79,7 @@
           <Property Name="amountProduct" Type="int" Nullable="false" />
           <Property Name="idCategory" Type="int" Nullable="false" />
           <Property Name="idManagement" Type="int" Nullable="false" />
+          <Property Name="imageProduct" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Request">
           <Key>
@@ -253,8 +254,7 @@
             <End Role="Request" EntitySet="Request" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="lojaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -344,6 +344,7 @@
           <NavigationProperty Name="Category" Relationship="Self.FK__Product__idCateg__4D94879B" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="ItemRequest" Relationship="Self.FK__ItemReque__idPro__5FB337D6" FromRole="Product" ToRole="ItemRequest" />
           <NavigationProperty Name="Management" Relationship="Self.FK__Product__idManag__4E88ABD4" FromRole="Product" ToRole="Management" />
+          <Property Name="imageProduct" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Request">
           <Key>
@@ -600,6 +601,7 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="lojaModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="imageProduct" ColumnName="imageProduct" />
                 <ScalarProperty Name="idProduct" ColumnName="idProduct" />
                 <ScalarProperty Name="nameProduct" ColumnName="nameProduct" />
                 <ScalarProperty Name="descriptionProduct" ColumnName="descriptionProduct" />
@@ -647,7 +649,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

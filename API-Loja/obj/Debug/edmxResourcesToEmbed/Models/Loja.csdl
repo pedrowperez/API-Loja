@@ -86,6 +86,7 @@
     <NavigationProperty Name="Category" Relationship="Self.FK__Product__idCateg__4D94879B" FromRole="Product" ToRole="Category" />
     <NavigationProperty Name="ItemRequest" Relationship="Self.FK__ItemReque__idPro__5FB337D6" FromRole="Product" ToRole="ItemRequest" />
     <NavigationProperty Name="Management" Relationship="Self.FK__Product__idManag__4E88ABD4" FromRole="Product" ToRole="Management" />
+    <Property Name="imageProduct" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Request">
     <Key>

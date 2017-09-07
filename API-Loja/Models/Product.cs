@@ -29,6 +29,7 @@ namespace API_Loja.Models
         public int amountProduct { get; set; }
         public int idCategory { get; set; }
         public int idManagement { get; set; }
+        public string imageProduct { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -74,6 +74,7 @@
     <Property Name="amountProduct" Type="int" Nullable="false" />
     <Property Name="idCategory" Type="int" Nullable="false" />
     <Property Name="idManagement" Type="int" Nullable="false" />
+    <Property Name="imageProduct" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Request">
     <Key>

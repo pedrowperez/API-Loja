@@ -71,6 +71,7 @@
     <EntitySetMapping Name="Product">
       <EntityTypeMapping TypeName="lojaModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="imageProduct" ColumnName="imageProduct" />
           <ScalarProperty Name="idProduct" ColumnName="idProduct" />
           <ScalarProperty Name="nameProduct" ColumnName="nameProduct" />
           <ScalarProperty Name="descriptionProduct" ColumnName="descriptionProduct" />
