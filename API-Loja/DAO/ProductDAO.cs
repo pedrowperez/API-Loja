@@ -1,39 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using API_Loja.Models;
 
 namespace API_Loja.DAO
 {
-    public class ProductDAO
+    public class ProductDAO : ILojaDAO<Product>
     {
-        public lojaEntities loja { get; set; }
+        public lojaEntities Loja { get; set; }
 
         public ProductDAO()
         {
-            loja = new lojaEntities();
+            Loja = new lojaEntities();
         }
 
         public IEnumerable<object> Get()
         {
-            return loja.Product
+            return Loja.Product
                 .Select(p => new {
                     p.idProduct,
                     p.nameProduct,
-                    p.descriptionProduct,
                     p.priceProduct,
                     p.discountProduct,
                     p.activeProduct,
-                    p.amountProduct,
-                    p.Category.nameCategory,
-                    p.Management.nameManagement
+                    p.amountProduct
                 });
         }
 
         public IEnumerable<object> Get(int id)
         {
-            return loja.Product.Where(p => p.idProduct == id)
+            return Loja.Product.Where(p => p.idProduct == id)
                 .Select(p => new {
                     p.idProduct,
                     p.nameProduct,
@@ -42,32 +37,33 @@ namespace API_Loja.DAO
                     p.discountProduct,
                     p.activeProduct,
                     p.amountProduct,
-                    p.Category.nameCategory,
-                    p.Management.nameManagement
+                    p.imageProduct,
+                    p.idCategory,
+                    p.idManagement
                 });
         }
 
         public void Add(Product product)
         {
-            loja.Product.Add(product);
-            loja.SaveChanges();
-            loja.Dispose();
+            Loja.Product.Add(product);
+            Loja.SaveChanges();
+            Loja.Dispose();
         }
 
         public void Update(Product product)
         {
-            Product oldProduct = loja.Product.Where(p => p.idProduct == product.idProduct).First();
-            loja.Entry(oldProduct).CurrentValues.SetValues(product);
-            loja.SaveChanges();
-            loja.Dispose();
+            Product oldProduct = Loja.Product.Where(p => p.idProduct == product.idProduct).First();
+            Loja.Entry(oldProduct).CurrentValues.SetValues(product);
+            Loja.SaveChanges();
+            Loja.Dispose();
         }
 
         public void Delete(int id)
         {
-            Product product = loja.Product.Where(p => p.idProduct == id).First();
-            loja.Product.Remove(product);
-            loja.SaveChanges();
-            loja.Dispose();
+            Product product = Loja.Product.Where(p => p.idProduct == id).First();
+            Loja.Product.Remove(product);
+            Loja.SaveChanges();
+            Loja.Dispose();
         }
     }
 }

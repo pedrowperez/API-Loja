@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using API_Loja.Models;
 using API_Loja.DAO;
-using Newtonsoft.Json;
 
 namespace API_Loja.Controllers
 {
     public class ProductController : ApiController
     {
         [HttpGet]
+        [Route("Api/Product")]
         public HttpResponseMessage Get()
         {
             try
@@ -28,6 +26,7 @@ namespace API_Loja.Controllers
         }
 
         [HttpGet]
+        [Route("Api/Product/{id}")]
         public HttpResponseMessage Get(int id)
         {
             try
@@ -43,6 +42,7 @@ namespace API_Loja.Controllers
         }
 
         [HttpPost]
+        [Route("Api/Product/{product}")]
         public HttpResponseMessage Post([FromBody]Product product)
         {
             try
@@ -58,6 +58,7 @@ namespace API_Loja.Controllers
         }
 
         [HttpPut]
+        [Route("Api/Product/{product}")]
         public HttpResponseMessage Put([FromBody]Product product)
         {
             try
@@ -73,6 +74,7 @@ namespace API_Loja.Controllers
         }
 
         [HttpDelete]
+        [Route("Api/Product/{id}")]
         public HttpResponseMessage Delete(int id)
         {
             try
