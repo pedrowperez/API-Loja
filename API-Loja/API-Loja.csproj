@@ -105,6 +105,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="DAO\CategoryDAO.cs" />
     <Compile Include="DAO\ILojaDAO.cs" />
     <Compile Include="DAO\ManagementDAO.cs" />

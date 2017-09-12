@@ -1,23 +1,25 @@
-﻿using System;
+﻿using API_Loja.DAO;
+using API_Loja.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using API_Loja.Models;
-using API_Loja.DAO;
 
 namespace API_Loja.Controllers
 {
-    public class ProductController : ApiController
+    public class CategoryController : ApiController
     {
         [HttpGet]
-        [Route("Api/Product")]
+        [Route("Api/Category")]
         public HttpResponseMessage Get()
         {
             try
             {
-                ProductDAO productDAO = new ProductDAO();
-                var products = productDAO.Get();
-                return Request.CreateResponse(HttpStatusCode.OK, products);
+                CategoryDAO categoryDAO = new CategoryDAO();
+                var categorys = categoryDAO.Get();
+                return Request.CreateResponse(HttpStatusCode.OK, categorys);
             }
             catch (Exception)
             {
@@ -26,14 +28,14 @@ namespace API_Loja.Controllers
         }
 
         [HttpGet]
-        [Route("Api/Product/{id}")]
+        [Route("Api/Category/{id}")]
         public HttpResponseMessage Get(int id)
         {
             try
             {
-                ProductDAO productDAO = new ProductDAO();
-                var products = productDAO.Get(id);
-                return Request.CreateResponse(HttpStatusCode.OK, products);
+                CategoryDAO categoryDAO = new CategoryDAO();
+                var categorys = categoryDAO.Get(id);
+                return Request.CreateResponse(HttpStatusCode.OK, categorys);
             }
             catch (Exception)
             {
@@ -42,14 +44,14 @@ namespace API_Loja.Controllers
         }
 
         [HttpPost]
-        [Route("Api/Product/{product}")]
-        public HttpResponseMessage Post([FromBody]Product product)
+        [Route("Api/Category/{category}")]
+        public HttpResponseMessage Post([FromBody]Category category)
         {
             try
             {
-                ProductDAO productDAO = new ProductDAO();
-                productDAO.Add(product);
-                return Request.CreateResponse(HttpStatusCode.OK, $"{product.nameProduct} added successfully");
+                CategoryDAO categoryDAO = new CategoryDAO();
+                categoryDAO.Add(category);
+                return Request.CreateResponse(HttpStatusCode.OK, $"{category.nameCategory} added successfully");
             }
             catch (Exception)
             {
@@ -58,14 +60,14 @@ namespace API_Loja.Controllers
         }
 
         [HttpPut]
-        [Route("Api/Product/{product}")]
-        public HttpResponseMessage Put([FromBody]Product product)
+        [Route("Api/Category/{category}")]
+        public HttpResponseMessage Put([FromBody]Category category)
         {
             try
             {
-                ProductDAO productDAO = new ProductDAO();
-                productDAO.Update(product);
-                return Request.CreateResponse(HttpStatusCode.OK, $"{product.nameProduct} updated successfully");
+                CategoryDAO categoryDAO = new CategoryDAO();
+                categoryDAO.Update(category);
+                return Request.CreateResponse(HttpStatusCode.OK, $"{category.nameCategory} updated successfully");
             }
             catch (Exception)
             {
@@ -74,12 +76,12 @@ namespace API_Loja.Controllers
         }
 
         [HttpDelete]
-        [Route("Api/Product/{id}")]
+        [Route("Api/Category/{id}")]
         public HttpResponseMessage Delete(int id)
         {
             try
             {
-                ProductDAO productDAO = new ProductDAO();
+                CategoryDAO productDAO = new CategoryDAO();
                 productDAO.Delete(id);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
