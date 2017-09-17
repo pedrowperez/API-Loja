@@ -17,6 +17,8 @@ namespace API_Loja.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
+            this.CategoryProduct = new HashSet<CategoryProduct>();
+            this.Image = new HashSet<Image>();
             this.ItemRequest = new HashSet<ItemRequest>();
         }
     
@@ -27,11 +29,13 @@ namespace API_Loja.Models
         public Nullable<decimal> discountProduct { get; set; }
         public bool activeProduct { get; set; }
         public int amountProduct { get; set; }
-        public int idCategory { get; set; }
-        public int idManagement { get; set; }
         public string imageProduct { get; set; }
+        public int idManagement { get; set; }
     
-        public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CategoryProduct> CategoryProduct { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Image { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemRequest> ItemRequest { get; set; }
         public virtual Management Management { get; set; }

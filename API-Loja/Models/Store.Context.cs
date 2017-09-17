@@ -13,10 +13,10 @@ namespace API_Loja.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class lojaEntities : DbContext
+    public partial class StoreEntities : DbContext
     {
-        public lojaEntities()
-            : base("name=lojaEntities")
+        public StoreEntities()
+            : base("name=StoreEntities")
         {
         }
     
@@ -27,7 +27,9 @@ namespace API_Loja.Models
     
         public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<CategoryProduct> CategoryProduct { get; set; }
         public virtual DbSet<Client> Client { get; set; }
+        public virtual DbSet<Image> Image { get; set; }
         public virtual DbSet<ItemRequest> ItemRequest { get; set; }
         public virtual DbSet<Management> Management { get; set; }
         public virtual DbSet<Payment> Payment { get; set; }

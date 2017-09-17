@@ -90,15 +90,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Models\Loja.Context.tt">
+    <Content Include="Models\Store.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Loja.Context.cs</LastGenOutput>
-      <DependentUpon>Loja.edmx</DependentUpon>
+      <DependentUpon>Store.edmx</DependentUpon>
+      <LastGenOutput>Store.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Loja.tt">
+    <Content Include="Models\Store.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Loja.edmx</DependentUpon>
-      <LastGenOutput>Loja.cs</LastGenOutput>
+      <DependentUpon>Store.edmx</DependentUpon>
+      <LastGenOutput>Store.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
   </ItemGroup>
@@ -114,56 +114,62 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Address.cs">
-      <DependentUpon>Loja.tt</DependentUpon>
+      <DependentUpon>Store.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
-      <DependentUpon>Loja.tt</DependentUpon>
+      <DependentUpon>Store.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CategoryProduct.cs">
+      <DependentUpon>Store.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Client.cs">
-      <DependentUpon>Loja.tt</DependentUpon>
+      <DependentUpon>Store.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Image.cs">
+      <DependentUpon>Store.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ItemRequest.cs">
-      <DependentUpon>Loja.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Loja.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Loja.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Loja.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Loja.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Loja.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Loja.edmx</DependentUpon>
+      <DependentUpon>Store.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Management.cs">
-      <DependentUpon>Loja.tt</DependentUpon>
+      <DependentUpon>Store.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Payment.cs">
-      <DependentUpon>Loja.tt</DependentUpon>
+      <DependentUpon>Store.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>Loja.tt</DependentUpon>
+      <DependentUpon>Store.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Request.cs">
-      <DependentUpon>Loja.tt</DependentUpon>
+      <DependentUpon>Store.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StatusRequest.cs">
-      <DependentUpon>Loja.tt</DependentUpon>
+      <DependentUpon>Store.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Store.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Store.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Store.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Store.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Store.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Store.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\Loja.edmx">
+    <EntityDeploy Include="Models\Store.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Loja.Designer.cs</LastGenOutput>
+      <LastGenOutput>Store.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Loja.edmx.diagram">
-      <DependentUpon>Loja.edmx</DependentUpon>
+    <Content Include="Models\Store.edmx.diagram">
+      <DependentUpon>Store.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
     <None Include="Web.Debug.config">

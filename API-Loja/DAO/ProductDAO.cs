@@ -6,16 +6,16 @@ namespace API_Loja.DAO
 {
     public class ProductDAO : ILojaDAO<Product>
     {
-        public lojaEntities Loja { get; set; }
+        public StoreEntities store { get; set; }
 
         public ProductDAO()
         {
-            Loja = new lojaEntities();
+            store = new StoreEntities();
         }
 
         public IEnumerable<object> Get()
         {
-            return Loja.Product
+            return store.Product
                 .Select(p => new {
                     p.idProduct,
                     p.nameProduct,
@@ -28,7 +28,7 @@ namespace API_Loja.DAO
 
         public IEnumerable<object> Get(int id)
         {
-            return Loja.Product.Where(p => p.idProduct == id)
+            return store.Product.Where(p => p.idProduct == id)
                 .Select(p => new {
                     p.idProduct,
                     p.nameProduct,
@@ -38,32 +38,31 @@ namespace API_Loja.DAO
                     p.activeProduct,
                     p.amountProduct,
                     p.imageProduct,
-                    p.idCategory,
                     p.idManagement
                 });
         }
 
         public void Add(Product product)
         {
-            Loja.Product.Add(product);
-            Loja.SaveChanges();
-            Loja.Dispose();
+            store.Product.Add(product);
+            store.SaveChanges();
+            store.Dispose();
         }
 
         public void Update(Product product)
         {
-            Product oldProduct = Loja.Product.Where(p => p.idProduct == product.idProduct).First();
-            Loja.Entry(oldProduct).CurrentValues.SetValues(product);
-            Loja.SaveChanges();
-            Loja.Dispose();
+            Product oldProduct = store.Product.Where(p => p.idProduct == product.idProduct).First();
+            store.Entry(oldProduct).CurrentValues.SetValues(product);
+            store.SaveChanges();
+            store.Dispose();
         }
 
         public void Delete(int id)
         {
-            Product product = Loja.Product.Where(p => p.idProduct == id).First();
-            Loja.Product.Remove(product);
-            Loja.SaveChanges();
-            Loja.Dispose();
+            Product product = store.Product.Where(p => p.idProduct == id).First();
+            store.Product.Remove(product);
+            store.SaveChanges();
+            store.Dispose();
         }
     }
 }

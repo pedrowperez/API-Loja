@@ -6,16 +6,16 @@ namespace API_Loja.DAO
 {
     public class CategoryDAO : ILojaDAO<Category>
     {
-        public lojaEntities Loja { get; set; }
+        public StoreEntities store { get; set; }
 
         public CategoryDAO()
         {
-            Loja = new lojaEntities();
+            store = new StoreEntities();
         }
 
         public IEnumerable<object> Get()
         {
-            return Loja.Category
+            return store.Category
                 .Select(c => new {
                     c.idCategory,
                     c.nameCategory
@@ -24,7 +24,7 @@ namespace API_Loja.DAO
 
         public IEnumerable<object> Get(int id)
         {
-            return Loja.Category.Where(c => c.idCategory == id)
+            return store.Category.Where(c => c.idCategory == id)
                 .Select(c => new {
                     c.idCategory,
                     c.nameCategory,
@@ -34,25 +34,25 @@ namespace API_Loja.DAO
 
         public void Add(Category category)
         {
-            Loja.Category.Add(category);
-            Loja.SaveChanges();
-            Loja.Dispose();
+            store.Category.Add(category);
+            store.SaveChanges();
+            store.Dispose();
         }
 
         public void Update(Category category)
         {
-            Category oldCategory = Loja.Category.Where(c => c.idCategory == category.idCategory).First();
-            Loja.Entry(oldCategory).CurrentValues.SetValues(category);
-            Loja.SaveChanges();
-            Loja.Dispose();
+            Category oldCategory = store.Category.Where(c => c.idCategory == category.idCategory).First();
+            store.Entry(oldCategory).CurrentValues.SetValues(category);
+            store.SaveChanges();
+            store.Dispose();
         }
 
         public void Delete(int id)
         {
-            Category category = Loja.Category.Where(c => c.idCategory == id).First();
-            Loja.Category.Remove(category);
-            Loja.SaveChanges();
-            Loja.Dispose();
+            Category category = store.Category.Where(c => c.idCategory == id).First();
+            store.Category.Remove(category);
+            store.SaveChanges();
+            store.Dispose();
         }
     }
 }

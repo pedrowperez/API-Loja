@@ -5,7 +5,7 @@ namespace API_Loja.DAO
 {
     interface ILojaDAO<T>
     {
-        lojaEntities Loja { get; set; }
+        StoreEntities store { get; set; }
         IEnumerable<object> Get();
         IEnumerable<object> Get(int id);
         void Add(T obj);
